@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f3f2f2">
+<title>Canavida · Guest</title>
+<link rel="stylesheet" href="_ds/classical-2b9a4656-8dcc-4d47-8d3d-afb5d2459be8/styles.css">
+<script src="_ds/classical-2b9a4656-8dcc-4d47-8d3d-afb5d2459be8/_ds_bundle.js"></script>
+<script src="canavida-data.js"></script>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#201f1d"></rect><text x="50" y="64" text-anchor="middle" font-family="Georgia,serif" font-size="44" fill="#b68235">C</text></svg></template>
+<style>html,body{margin:0;height:100%;background:var(--color-surface)}a{color:var(--color-accent-700)}a:hover{color:var(--color-accent-800)}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}</style>
+</helmet>
+<div style="min-height:100dvh;display:flex;align-items:center;justify-content:center;font-family:var(--font-body);color:var(--color-text)">
+<div data-screen-label="App" style="position:relative;width:100%;max-width:430px;height:100dvh;max-height:932px;background:var(--color-bg);display:flex;flex-direction:column;overflow:hidden;box-shadow:var(--shadow-lg)">
+
+<sc-if value="{{ isLanding }}" hint-placeholder-val="{{ true }}">
+<div data-screen-label="01 Landing" style="flex:1;display:flex;flex-direction:column;overflow-y:auto">
+  <div style="position:relative;height:56%;min-height:330px;flex:none;overflow:hidden">
+    <img src="assets/villa-colibri.jpg" alt="Villa Colibrí, Canavida" style="width:100%;height:100%;object-fit:cover;display:block"></img>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,18,15,.45) 0%,rgba(20,18,15,0) 34%)"></div>
+    <div style="position:absolute;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top) + 18px) 22px 0">
+      <span style="font-family:var(--font-heading);font-size:30px;font-weight:500;color:#fff;letter-spacing:.02em">Canavida</span>
+      <div style="display:flex;border:1px solid rgba(255,255,255,.7);border-radius:var(--radius-md);overflow:hidden">
+        <button onClick="{{ setEs }}" style="background:{{ esBg }};color:{{ esFg }};border:0;padding:6px 10px;font:600 12px var(--font-body);cursor:pointer;letter-spacing:.06em">ES</button>
+        <button onClick="{{ setEn }}" style="background:{{ enBg }};color:{{ enFg }};border:0;padding:6px 10px;font:600 12px var(--font-body);cursor:pointer;letter-spacing:.06em">EN</button>
+      </div>
+    </div>
+  </div>
+  <div style="flex:1;padding:28px 24px calc(env(safe-area-inset-bottom) + 24px);display:flex;flex-direction:column;gap:14px;border-top:2px solid var(--color-accent)">
+    <span style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-700)">Uvita · Costa Rica</span>
+    <h1 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:36px;line-height:1.05;text-wrap:balance">{{ t.landingTitle }}</h1>
+    <p style="margin:0;font-size:15px;line-height:1.5;color:var(--color-neutral-700);text-wrap:pretty">{{ t.landingLead }}</p>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:6px">
+      <label for="resnum" style="font-size:13px;color:var(--color-neutral-700)">{{ t.resLabel }}</label>
+      <input id="resnum" class="input" inputmode="numeric" autocomplete="off" placeholder="{{ t.resPh }}" value="{{ code }}" onChange="{{ onCode }}" onKeyDown="{{ onCodeKey }}" style="height:52px;font-size:20px;letter-spacing:.12em;font-variant-numeric:tabular-nums"></input>
+      <sc-if value="{{ hasError }}"><p style="margin:0;font-size:14px;line-height:1.45;color:var(--color-accent-800)">{{ errorText }} <a href="{{ waHelp }}" target="_blank">WhatsApp 8794-2201</a></p></sc-if>
+      <button class="btn btn-primary btn-block" onClick="{{ lookup }}" style="height:52px;font-size:16px">{{ lookupLabel }}</button>
+      <sc-if value="{{ showHint }}"><p style="margin:0;font-size:12px;color:var(--color-neutral-600)">Demo: 24581 · 24590 · 24602</p></sc-if>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ isApp }}" hint-placeholder-val="{{ false }}">
+<div style="flex:none;display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top) + 12px) 20px 12px;border-bottom:1px solid var(--color-divider)">
+  <span style="font-family:var(--font-heading);font-size:24px;font-weight:500">Canavida</span>
+  <div style="display:flex;align-items:center;gap:6px">
+    <button onClick="{{ toggleLang }}" class="btn btn-ghost" style="padding:6px 10px;font-size:12px;letter-spacing:.08em">{{ otherLang }}</button>
+    <button onClick="{{ shareApp }}" class="btn btn-ghost btn-icon" aria-label="Share" style="width:40px;height:40px">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+    </button>
+  </div>
+</div>
+
+<div ref="{{ scrollRef }}" style="flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch">
+
+<sc-if value="{{ tabArrive }}">
+<div data-screen-label="02 Cómo llegar" style="padding:24px 22px 32px;display:flex;flex-direction:column;gap:22px">
+  <div style="display:flex;flex-direction:column;gap:6px">
+    <span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-700);font-variant-numeric:tabular-nums">{{ resKicker }}</span>
+    <h1 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:38px;line-height:1.05">{{ greeting }}</h1>
+    <p style="margin:0;font-size:14px;color:var(--color-neutral-700)">{{ resMeta }}</p>
+  </div>
+  <div class="plate" style="height:150px;overflow:hidden"><img src="assets/villa-colibri.jpg" alt="" style="width:100%;height:100%;object-fit:cover;object-position:50% 45%;display:block"></img></div>
+  <div style="display:flex;flex-direction:column;gap:4px">
+    <h2 style="margin:0;font-family:var(--font-heading);font-weight:600;font-size:26px">{{ t.howTitle }}</h2>
+    <p style="margin:0;font-size:14px;color:var(--color-neutral-700)">{{ t.howLead }}</p>
+  </div>
+  <ol style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column">
+    <li style="display:grid;grid-template-columns:44px 1fr;gap:12px;padding:16px 0;border-top:1px solid var(--color-divider)"><span style="font-family:var(--font-heading);font-size:34px;line-height:1;color:var(--color-accent);font-variant-numeric:tabular-nums">1</span><span style="font-size:16px;line-height:1.45;padding-top:4px">{{ t.step1 }}</span></li>
+    <li style="display:grid;grid-template-columns:44px 1fr;gap:12px;padding:16px 0;border-top:1px solid var(--color-divider)"><span style="font-family:var(--font-heading);font-size:34px;line-height:1;color:var(--color-accent);font-variant-numeric:tabular-nums">2</span><span style="font-size:16px;line-height:1.45;padding-top:4px">{{ t.step2 }}</span></li>
+    <li style="display:grid;grid-template-columns:44px 1fr;gap:12px;padding:16px 0;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)"><span style="font-family:var(--font-heading);font-size:34px;line-height:1;color:var(--color-accent);font-variant-numeric:tabular-nums">3</span><span style="font-size:16px;line-height:1.45;padding-top:4px">{{ t.step3 }} <a href="tel:+50687942201" style="white-space:nowrap">8794-2201</a></span></li>
+  </ol>
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <a class="btn btn-primary btn-block" href="{{ waze }}" target="_blank" style="height:52px;font-size:16px;gap:10px;text-decoration:none">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>{{ t.openWaze }}</a>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+      <a class="btn btn-secondary" href="tel:+50687942201" style="height:46px;gap:8px;text-decoration:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>{{ t.call }}</a>
+      <a class="btn btn-secondary" href="{{ waHelp }}" target="_blank" style="height:46px;gap:8px;text-decoration:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg>WhatsApp</a>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)">
+    <div style="padding:14px 0;display:flex;flex-direction:column;gap:2px;border-right:1px solid var(--color-divider)"><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600)">Check-in</span><span style="font-family:var(--font-heading);font-size:24px;font-variant-numeric:tabular-nums">3:00 p.m.</span></div>
+    <div style="padding:14px 0 14px 16px;display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-600)">Check-out</span><span style="font-family:var(--font-heading);font-size:24px;font-variant-numeric:tabular-nums">11:00 a.m.</span></div>
+  </div>
+  <button onClick="{{ logout }}" class="btn btn-ghost" style="align-self:flex-start;font-size:13px;padding-left:0">{{ t.changeRes }}</button>
+</div>
+</sc-if>
+
+<sc-if value="{{ tabTours }}">
+<div data-screen-label="03 Tours" style="padding:24px 22px 32px;display:flex;flex-direction:column;gap:18px">
+  <div style="display:flex;flex-direction:column;gap:6px">
+    <span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-700);font-variant-numeric:tabular-nums">{{ toursKicker }}</span>
+    <h1 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:36px;line-height:1.05">{{ t.toursTitle }}</h1>
+    <p style="margin:0;font-size:14px;line-height:1.5;color:var(--color-neutral-700);text-wrap:pretty">{{ t.toursLead }}</p>
+  </div>
+  <div style="display:flex;flex-direction:column;border-bottom:1px solid var(--color-divider)">
+    <sc-for list="{{ tours }}" as="tour" hint-placeholder-count="6">
+      <div style="border-top:1px solid var(--color-divider)">
+        <button onClick="{{ tour.toggle }}" style="width:100%;display:grid;grid-template-columns:34px 1fr 20px;align-items:center;gap:10px;padding:16px 0;background:none;border:0;text-align:left;cursor:pointer;color:inherit">
+          <span style="font-family:var(--font-heading);font-size:20px;color:var(--color-accent);font-variant-numeric:tabular-nums">{{ tour.num }}</span>
+          <span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-family:var(--font-heading);font-weight:600;font-size:20px;line-height:1.15">{{ tour.title }}</span><span style="font-size:12.5px;color:var(--color-neutral-600)">{{ tour.short }}</span></span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="transition:transform .2s;transform:{{ tour.chev }}"><path d="m6 9 6 6 6-6"></path></svg>
+        </button>
+        <sc-if value="{{ tour.open }}">
+          <div style="padding:0 0 20px 44px;display:flex;flex-direction:column;gap:14px">
+            <p style="margin:0;font-size:14.5px;line-height:1.55;text-align:justify;hyphens:auto;white-space:pre-line">{{ tour.desc }}</p>
+            <sc-for list="{{ tour.facts }}" as="f">
+              <div style="display:flex;flex-direction:column;gap:3px"><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-700)">{{ f.label }}</span><span style="font-size:14px;line-height:1.5;white-space:pre-line">{{ f.text }}</span></div>
+            </sc-for>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:4px">
+              <a class="btn btn-primary" href="{{ tour.wa }}" target="_blank" style="gap:8px;text-decoration:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg>{{ t.bookWa }}</a>
+              <sc-if value="{{ tour.hasLoc }}"><a class="btn btn-ghost" href="{{ tour.loc }}" target="_blank" style="text-decoration:none">{{ t.location }}</a></sc-if>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </sc-for>
+  </div>
+</div>
+</sc-if>
+
+<sc-if value="{{ tabCheckin }}">
+<div data-screen-label="04 Self check-in" style="padding:24px 22px 32px;display:flex;flex-direction:column;gap:22px">
+  <div style="display:flex;flex-direction:column;gap:6px">
+    <span style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-700)">Self check-in</span>
+    <h1 style="margin:0;font-family:var(--font-heading);font-weight:500;font-size:36px;line-height:1.05">{{ t.ciTitle }}</h1>
+  </div>
+  <sc-if value="{{ ciDone }}">
+    <div class="card" style="display:flex;flex-direction:column;gap:10px;padding:22px">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg>
+      <h2 style="margin:0;font-family:var(--font-heading);font-weight:600;font-size:24px">{{ t.ciDoneTitle }}</h2>
+      <p style="margin:0;font-size:14.5px;line-height:1.5">{{ t.ciDoneBody }}</p>
+      <button class="btn btn-ghost" onClick="{{ ciReset }}" style="align-self:flex-start;padding-left:0">{{ t.ciAgain }}</button>
+    </div>
+  </sc-if>
+  <sc-if value="{{ ciForm }}">
+  <section style="display:flex;flex-direction:column;gap:12px">
+    <div style="display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:baseline"><span style="font-family:var(--font-heading);font-size:26px;color:var(--color-accent)">1</span><div style="display:flex;flex-direction:column;gap:4px"><h2 style="margin:0;font-family:var(--font-heading);font-weight:600;font-size:22px">{{ t.ciDocsTitle }}</h2><p style="margin:0;font-size:14px;line-height:1.5;color:var(--color-neutral-700)">{{ ciDocsLead }}</p></div></div>
+    <input ref="{{ fileRef }}" type="file" accept="image/*" multiple="{{ true }}" onChange="{{ onFiles }}" style="display:none"></input>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding-left:44px">
+      <sc-for list="{{ photos }}" as="p">
+        <div style="position:relative;aspect-ratio:3/4;border:1px solid var(--color-divider);border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface)">
+          <div style="width:100%;height:100%;background-size:cover;background-position:center;background-image:{{ p.bg }}"></div>
+          <button onClick="{{ p.remove }}" aria-label="Remove" style="position:absolute;top:4px;right:4px;width:26px;height:26px;border-radius:50%;border:0;background:rgba(32,31,29,.72);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+        </div>
+      </sc-for>
+      <button onClick="{{ pickFiles }}" style="aspect-ratio:3/4;border:1px dashed var(--color-accent);border-radius:var(--radius-md);background:transparent;color:var(--color-accent-700);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;font:13px var(--font-body)" style-hover="background:var(--color-accent-100)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>{{ t.addPhoto }}</button>
+    </div>
+    <p style="margin:0;padding-left:44px;font-size:12.5px;color:var(--color-neutral-600);font-variant-numeric:tabular-nums">{{ photoCount }}</p>
+  </section>
+  <section style="display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--color-divider);padding-top:20px">
+    <div style="display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:baseline"><span style="font-family:var(--font-heading);font-size:26px;color:var(--color-accent)">2</span><div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-family:var(--font-heading);font-weight:600;font-size:22px">Early check-in</h2><p style="margin:0;font-size:14px;line-height:1.5;color:var(--color-neutral-700)">{{ t.earlyBody }}</p>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;border:1px solid var(--color-accent);border-radius:var(--radius-md);padding:12px 14px;margin-top:4px"><span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-700)">SINPE Móvil · Canavida</span><a href="tel:+50687942201" style="font-family:var(--font-heading);font-size:24px;color:var(--color-text);text-decoration:none;font-variant-numeric:tabular-nums">8794-2201</a></span><span style="font-family:var(--font-heading);font-size:26px;font-variant-numeric:tabular-nums">₡10.000</span></div>
+      <label style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45;cursor:pointer;margin-top:4px"><input type="checkbox" checked="{{ early }}" onChange="{{ toggleEarly }}" style="width:20px;height:20px;accent-color:var(--color-accent);flex:none;margin:1px 0 0"></input>{{ t.earlyCheck }}</label>
+    </div></div>
+  </section>
+  <section style="display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--color-divider);padding-top:20px">
+    <div style="display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:baseline"><span style="font-family:var(--font-heading);font-size:26px;color:var(--color-accent)">3</span><div style="display:flex;flex-direction:column;gap:6px"><h2 style="margin:0;font-family:var(--font-heading);font-weight:600;font-size:22px">{{ t.policyTitle }}</h2>
+      <label style="display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.5;cursor:pointer"><input type="checkbox" checked="{{ policy }}" onChange="{{ togglePolicy }}" style="width:20px;height:20px;accent-color:var(--color-accent);flex:none;margin:1px 0 0"></input>{{ t.policyText }}</label>
+    </div></div>
+  </section>
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <button class="btn btn-primary btn-block" disabled="{{ ciDisabled }}" onClick="{{ submitCheckin }}" style="height:52px;font-size:16px">{{ t.ciSubmit }}</button>
+    <sc-if value="{{ ciDisabled }}"><p style="margin:0;font-size:12.5px;color:var(--color-neutral-600);text-align:center">{{ t.ciNeed }}</p></sc-if>
+  </div>
+  </sc-if>
+</div>
+</sc-if>
+
+<sc-if value="{{ tabAgent }}">
+<div data-screen-label="05 Asistente" style="padding:20px 18px 12px;display:flex;flex-direction:column;gap:14px;min-height:100%">
+  <sc-for list="{{ msgs }}" as="m">
+    <sc-if value="{{ m.isBot }}">
+      <div style="align-self:flex-start;max-width:88%;display:flex;flex-direction:column;gap:8px;border:1px solid var(--color-divider);border-radius:var(--radius-lg);padding:12px 14px;background:var(--color-bg)">
+        <sc-if value="{{ m.hasTitle }}"><span style="font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-accent-700)">{{ m.title }}</span></sc-if>
+        <p style="margin:0;font-size:14.5px;line-height:1.5;white-space:pre-line;overflow-wrap:anywhere">{{ m.text }}</p>
+        <sc-if value="{{ m.hasAction }}"><button class="btn btn-secondary" onClick="{{ m.action }}" style="align-self:flex-start;font-size:13px">{{ m.actionLabel }}</button></sc-if>
+        <sc-if value="{{ m.hasWa }}"><a class="btn btn-ghost" href="{{ m.wa }}" target="_blank" style="align-self:flex-start;font-size:13px;padding-left:0;text-decoration:none">{{ t.askTeam }}</a></sc-if>
+      </div>
+    </sc-if>
+    <sc-if value="{{ m.isUser }}">
+      <div style="align-self:flex-end;max-width:80%;border:1px solid var(--color-accent);border-radius:var(--radius-lg);padding:10px 14px;font-size:14.5px;line-height:1.45;background:var(--color-accent-100)">{{ m.text }}</div>
+    </sc-if>
+  </sc-for>
+  <sc-if value="{{ typing }}"><div style="align-self:flex-start;font-size:13px;color:var(--color-neutral-600);font-style:italic">{{ t.typing }}</div></sc-if>
+</div>
+</sc-if>
+</div>
+
+<sc-if value="{{ tabAgent }}">
+<div style="flex:none;border-top:1px solid var(--color-divider);padding:10px 14px;display:flex;flex-direction:column;gap:10px;background:var(--color-bg)">
+  <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none">
+    <sc-for list="{{ chips }}" as="c"><button onClick="{{ c.ask }}" class="tag tag-outline" style="flex:none;cursor:pointer;font-size:12.5px;padding:6px 10px;background:transparent">{{ c.label }}</button></sc-for>
+  </div>
+  <div style="display:flex;gap:8px">
+    <input class="input" value="{{ draft }}" onChange="{{ onDraft }}" onKeyDown="{{ onDraftKey }}" placeholder="{{ t.askPh }}" style="flex:1;min-width:0;height:46px"></input>
+    <button class="btn btn-primary btn-icon" onClick="{{ send }}" aria-label="Send" style="width:46px;height:46px;flex:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg></button>
+  </div>
+</div>
+</sc-if>
+
+<nav style="flex:none;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--color-divider);padding:6px 6px calc(env(safe-area-inset-bottom) + 6px);background:var(--color-bg)">
+  <button onClick="{{ goArrive }}" style="background:none;border:0;border-top:2px solid {{ tc.arriveLine }};margin-top:-7px;padding:10px 0 4px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;color:{{ tc.arrive }};font:12px var(--font-body);min-height:52px">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>{{ t.tabArrive }}</button>
+  <button onClick="{{ goTours }}" style="background:none;border:0;border-top:2px solid {{ tc.toursLine }};margin-top:-7px;padding:10px 0 4px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;color:{{ tc.tours }};font:12px var(--font-body);min-height:52px">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"></path></svg>Tours</button>
+  <button onClick="{{ goCheckin }}" style="background:none;border:0;border-top:2px solid {{ tc.checkinLine }};margin-top:-7px;padding:10px 0 4px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;color:{{ tc.checkin }};font:12px var(--font-body);min-height:52px">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="8" height="4" x="8" y="2" rx="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="m9 14 2 2 4-4"></path></svg>Check-in</button>
+  <button onClick="{{ goAgent }}" style="background:none;border:0;border-top:2px solid {{ tc.agentLine }};margin-top:-7px;padding:10px 0 4px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;color:{{ tc.agent }};font:12px var(--font-body);min-height:52px">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>{{ t.tabAgent }}</button>
+</nav>
+</sc-if>
+
+<sc-if value="{{ hasToast }}"><div style="position:absolute;left:50%;bottom:96px;transform:translateX(-50%);background:var(--color-text);color:var(--color-bg);padding:10px 16px;border-radius:var(--radius-md);font-size:13px;box-shadow:var(--shadow-md);white-space:nowrap">{{ toast }}</div></sc-if>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;apiUrl&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Lodgify&quot;},&quot;defaultLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;es&quot;,&quot;en&quot;],&quot;default&quot;:&quot;es&quot;,&quot;tsType&quot;:&quot;'es'|'en'&quot;},&quot;showDemoHint&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+const STR = {
+  es: {
+    landingTitle: 'Bienvenidos a Canavida', landingLead: 'Ingrese su número de reserva para ver cómo llegar, los tours, el self check-in y nuestro asistente.',
+    resLabel: 'Número de reserva', resPh: 'Ej. 24581', find: 'Continuar', finding: 'Buscando…',
+    notFound: 'No encontramos esa reserva. Revise el número o escríbanos:', offlineErr: 'Sin conexión. Conéctese a internet para la primera búsqueda o escríbanos:',
+    hello: 'Hola', guests: 'huéspedes', howTitle: 'Cómo llegar', howLead: 'Tres pasos y estará en casa.',
+    step1: 'Tomar la entrada Mystic Sushi.', step2: 'Se recomienda 4x4 para el gravel road.', step3: 'Cualquier cosa, comunicarse de inmediato al',
+    openWaze: 'Abrir ruta en Waze', call: 'Llamar', changeRes: 'Cambiar de reserva',
+    toursTitle: 'Tours y experiencias', toursLead: 'Para reservar o consultar disponibilidad, escríbanos por WhatsApp y con gusto le ayudamos.', toursCount: 'experiencias',
+    time: 'Horario', inc: 'Incluye', recs: 'Recomendaciones', restr: 'Restricciones', season: 'Temporada', bookWa: 'Reservar por WhatsApp', location: 'Ubicación',
+    ciTitle: 'Llegue y descanse', ciDocsTitle: 'Documentos', ciDocsLead1: 'Envíe la foto de la cédula o pasaporte de todos los huéspedes', addPhoto: 'Agregar foto', photos: 'fotos', photo: 'foto', noPhotos: 'Aún no hay fotos',
+    earlyBody: '¿Le gustaría hacer early check-in? Tiene un costo de ₡10.000 y puede depositarlo por SINPE Móvil.', earlyCheck: 'Me interesa el early check-in (sujeto a disponibilidad).',
+    policyTitle: 'Política de daños', policyText: 'Acepto la política de retención de $200 en caso de daños a la propiedad.',
+    ciSubmit: 'Enviar check-in', ciNeed: 'Agregue al menos una foto y acepte la política para continuar.',
+    ciDoneTitle: 'Check-in enviado', ciDoneBody: 'Gracias. Nuestro equipo revisará sus documentos y le confirmará por WhatsApp.', ciAgain: 'Enviar más documentos',
+    tabArrive: 'Llegar', tabAgent: 'Asistente', askPh: 'Escriba su pregunta…', typing: 'Escribiendo…', askTeam: 'Hablar con el equipo →',
+    botHi: 'Hola {n}, soy el asistente de Canavida. Pregúnteme sobre wifi, early check-in, lavandería, mascotas, cómo llegar y más.',
+    botMiss: 'No tengo una respuesta exacta para eso. Nuestro equipo le responde enseguida por WhatsApp.',
+    toursAns: 'Ofrecemos estas experiencias:\n', toursGo: 'Ver tours', dirGo: 'Ver cómo llegar', ciGo: 'Ir al check-in',
+    ciAns: 'Para el self check-in envíe la foto de la cédula o pasaporte de todos los huéspedes, y acepte la política de retención de $200 en caso de daños. El early check-in cuesta ₡10.000 por SINPE Móvil al 8794-2201.',
+    shareMsg: 'Canavida · guía del huésped', copied: 'Enlace copiado', waCheckin: 'Hola Canavida, envío mi self check-in. Reserva {c} ({n}), {p} documento(s).', waEarly: ' Me interesa el early check-in (₡10.000 por SINPE).', waPolicy: ' Acepto la política de retención de $200 por daños.', waTour: 'Hola Canavida, quisiera reservar el tour: {t}. Reserva {c}.', waHelp: 'Hola Canavida, necesito ayuda. Reserva {c}.'
+  },
+  en: {
+    landingTitle: 'Welcome to Canavida', landingLead: 'Enter your reservation number to see directions, tours, self check-in and our assistant.',
+    resLabel: 'Reservation number', resPh: 'e.g. 24581', find: 'Continue', finding: 'Looking up…',
+    notFound: 'We could not find that reservation. Check the number or message us:', offlineErr: 'No connection. Connect to the internet for the first lookup, or message us:',
+    hello: 'Welcome', guests: 'guests', howTitle: 'Getting here', howLead: 'Three steps and you are home.',
+    step1: 'Take the Mystic Sushi entrance.', step2: 'A 4x4 is recommended for the gravel road.', step3: 'For anything at all, contact us right away at',
+    openWaze: 'Open route in Waze', call: 'Call', changeRes: 'Change reservation',
+    toursTitle: 'Tours & experiences', toursLead: 'To book or check availability, message us on WhatsApp and we will gladly help.', toursCount: 'experiences',
+    time: 'Schedule', inc: 'Includes', recs: 'Recommendations', restr: 'Restrictions', season: 'Season', bookWa: 'Book on WhatsApp', location: 'Location',
+    ciTitle: 'Arrive and unwind', ciDocsTitle: 'Documents', ciDocsLead1: 'Send a photo of the ID or passport of every guest', addPhoto: 'Add photo', photos: 'photos', photo: 'photo', noPhotos: 'No photos yet',
+    earlyBody: 'Would you like an early check-in? It costs ₡10,000 and you can pay by SINPE Móvil.', earlyCheck: 'I am interested in early check-in (subject to availability).',
+    policyTitle: 'Damage policy', policyText: 'I accept the $200 hold policy in case of damage to the property.',
+    ciSubmit: 'Send check-in', ciNeed: 'Add at least one photo and accept the policy to continue.',
+    ciDoneTitle: 'Check-in sent', ciDoneBody: 'Thank you. Our team will review your documents and confirm on WhatsApp.', ciAgain: 'Send more documents',
+    tabArrive: 'Arrive', tabAgent: 'Assistant', askPh: 'Type your question…', typing: 'Typing…', askTeam: 'Talk to our team →',
+    botHi: 'Hi {n}, I am the Canavida assistant. Ask me about Wi-Fi, early check-in, laundry, pets, directions and more.',
+    botMiss: 'I do not have an exact answer for that. Our team will reply right away on WhatsApp.',
+    toursAns: 'We offer these experiences:\n', toursGo: 'See tours', dirGo: 'See directions', ciGo: 'Go to check-in',
+    ciAns: 'For self check-in, send a photo of the ID or passport of every guest and accept the $200 hold policy in case of damage. Early check-in costs ₡10,000 by SINPE Móvil to 8794-2201.',
+    shareMsg: 'Canavida · guest guide', copied: 'Link copied', waCheckin: 'Hi Canavida, sending my self check-in. Reservation {c} ({n}), {p} document(s).', waEarly: ' I am interested in early check-in (₡10,000 by SINPE).', waPolicy: ' I accept the $200 damage hold policy.', waTour: 'Hi Canavida, I would like to book the tour: {t}. Reservation {c}.', waHelp: 'Hi Canavida, I need help. Reservation {c}.'
+  }
+};
+const CHIPS = ['wifi', 'early', 'late', 'vehicle', 'food', 'laundry', 'pets', 'ac', 'breakfast', 'pool'];
+const norm = s => (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+const fill = (s, o) => s.replace(/\{(\w)\}/g, (_, k) => o[k] ?? '');
+
+class Component extends DCLogic {
+  state = { screen: 'landing', lang: null, code: '', error: false, loading: false, res: null, tab: 'arrive', openTour: null, photos: [], early: false, policy: false, ciDone: false, msgs: [], draft: '', typing: false, toast: '' };
+  scrollRef = React.createRef();
+  fileRef = React.createRef();
+  data() { return window.CANAVIDA || { reservations: [], tours: [], faq: [], whatsapp: '50687942201', waze: '#' }; }
+  L() { return this.state.lang || this.props.defaultLang || 'es'; }
+  T() { return STR[this.L()]; }
+  componentDidMount() {
+    try {
+      const s = JSON.parse(localStorage.getItem('canavida.session') || 'null');
+      if (s) {
+        const res = s.res || this.find(s.code);
+        this.setState({ lang: s.lang || null, ...(res ? { screen: 'app', res, code: s.code, tab: s.tab || 'arrive' } : {}) }, () => res && this.greet());
+      }
+    } catch (e) {}
+  }
+  componentDidUpdate(pp, ps) {
+    const el = this.scrollRef.current;
+    if (!el) return;
+    if (ps.tab !== this.state.tab) el.scrollTop = 0;
+    else if (this.state.tab === 'agent' && (ps.msgs.length !== this.state.msgs.length || ps.typing !== this.state.typing)) el.scrollTop = el.scrollHeight;
+  }
+  save(extra) {
+    try { localStorage.setItem('canavida.session', JSON.stringify({ code: this.state.res?.code, res: this.state.res, lang: this.state.lang, tab: this.state.tab, ...extra })); } catch (e) {}
+  }
+  find(code) {
+    const c = norm(String(code)).replace(/[^a-z0-9]/g, '');
+    return this.data().reservations.find(r => norm(r.code).replace(/[^a-z0-9]/g, '') === c) || null;
+  }
+  wa(text) { return 'https://wa.me/' + this.data().whatsapp + '?text=' + encodeURIComponent(text); }
+  first() { return (this.state.res?.name || '').split(' ')[0]; }
+  greet() { this.setState({ msgs: [{ from: 'bot', key: 'hi' }] }); }
+  apiUrl() { return (this.props.apiUrl || this.data().apiUrl || '').replace(/\/+$/, ''); }
+  async remote(code) {
+    const r = await fetch(this.apiUrl() + '/reservation?code=' + encodeURIComponent(code.trim()));
+    if (r.status === 404) return null;
+    if (!r.ok) throw new Error('upstream');
+    const d = await r.json();
+    return { code: d.code, name: d.name || '', villa: d.villa || 'Canavida', arrive: d.arrive, depart: d.depart, guests: d.guests || 1 };
+  }
+  lookup = async () => {
+    const code = this.state.code.trim();
+    if (!code) return;
+    this.setState({ loading: true, error: false, offline: false });
+    let res = null, offline = false;
+    if (this.apiUrl()) {
+      try { res = await this.remote(code); } catch (e) { offline = true; res = this.cached(code); }
+    } else {
+      await new Promise(r => setTimeout(r, 500));
+      res = this.find(code);
+    }
+    if (!res) return this.setState({ loading: false, error: true, offline });
+    this.setState({ loading: false, res, screen: 'app', tab: 'arrive' }, () => { this.save({ res }); this.greet(); });
+  };
+  cached(code) {
+    try { const s = JSON.parse(localStorage.getItem('canavida.session') || 'null'); return s && s.res && norm(s.res.code) === norm(code) ? s.res : null; } catch (e) { return null; }
+  }
+  logout = () => { try { localStorage.removeItem('canavida.session'); } catch (e) {} this.setState({ screen: 'landing', res: null, code: '', msgs: [], photos: [], ciDone: false, policy: false, early: false }); };
+  setTab = tab => this.setState({ tab }, () => this.save());
+  setLang = lang => this.setState({ lang }, () => this.save());
+  flash(toast) { this.setState({ toast }); clearTimeout(this._t); this._t = setTimeout(() => this.setState({ toast: '' }), 2200); }
+  shareApp = async () => {
+    const url = location.href.split('#')[0];
+    if (navigator.share) { try { await navigator.share({ title: 'Canavida', text: this.T().shareMsg, url }); } catch (e) {} return; }
+    window.open(this.wa(this.T().shareMsg + ' ' + url), '_blank');
+  };
+  onFiles = e => {
+    const files = Array.from(e.target.files || []);
+    const add = files.map(f => ({ id: Math.random().toString(36).slice(2), file: f, url: URL.createObjectURL(f) }));
+    this.setState(s => ({ photos: s.photos.concat(add) }));
+    e.target.value = '';
+  };
+  submitCheckin = async () => {
+    const t = this.T(), r = this.state.res;
+    const text = fill(t.waCheckin, { c: r.code, n: r.name, p: this.state.photos.length }) + (this.state.early ? t.waEarly : '') + t.waPolicy;
+    const files = this.state.photos.map(p => p.file);
+    try {
+      if (navigator.canShare && navigator.canShare({ files })) await navigator.share({ files, text });
+      else window.open(this.wa(text), '_blank');
+      this.setState({ ciDone: true });
+    } catch (e) {}
+  };
+  answer(q) {
+    const t = this.T(), n = norm(q), L = this.L();
+    const has = arr => arr.some(k => n.includes(k));
+    if (has(['tour', 'excursion', 'actividad', 'activit', 'paseo'])) return { key: 'tours' };
+    if (has(['llegar', 'direccion', 'ubicacion', 'waze', 'mapa', 'como llego', 'direction', 'location', 'address', 'get there'])) return { key: 'dir' };
+    if (has(['pasaporte', 'cedula', 'documento', 'passport', 'self check', 'id card'])) return { key: 'ci' };
+    let best = null, score = 0;
+    for (const f of this.data().faq) {
+      let s = 0;
+      for (const k of f.kw) {
+        const kk = norm(k);
+        const hit = kk.length <= 3 ? new RegExp('(^|[^a-z0-9])' + kk.replace(/[^a-z0-9]/g, '\\$&') + '($|[^a-z0-9])').test(n) : n.includes(kk);
+        if (hit) s += kk.length;
+      }
+      if (s > score) { score = s; best = f; }
+    }
+    return best ? { key: 'faq', id: best.id } : { key: 'miss' };
+  }
+  ask = q => {
+    q = (q || '').trim();
+    if (!q) return;
+    this.setState(s => ({ msgs: s.msgs.concat({ from: 'user', text: q }), draft: '', typing: true }));
+    setTimeout(() => this.setState(s => ({ typing: false, msgs: s.msgs.concat({ from: 'bot', ...this.answer(q) }) })), 550);
+  };
+  botView(m) {
+    const t = this.T(), L = this.L(), d = this.data(), r = this.state.res || {};
+    const help = this.wa(fill(t.waHelp, { c: r.code }));
+    const base = { isBot: true, isUser: false, hasTitle: false, hasAction: false, hasWa: false, wa: help };
+    if (m.key === 'hi') return { ...base, text: fill(t.botHi, { n: this.first() }) };
+    if (m.key === 'tours') return { ...base, title: 'Tours', hasTitle: true, text: t.toursAns + d.tours.map(x => '· ' + x.title[L]).join('\n'), hasAction: true, actionLabel: t.toursGo, action: () => this.setTab('tours'), hasWa: true };
+    if (m.key === 'dir') return { ...base, title: t.howTitle, hasTitle: true, text: '1. ' + t.step1 + '\n2. ' + t.step2 + '\n3. ' + t.step3 + ' 8794-2201', hasAction: true, actionLabel: t.dirGo, action: () => this.setTab('arrive') };
+    if (m.key === 'ci') return { ...base, title: 'Self check-in', hasTitle: true, text: t.ciAns, hasAction: true, actionLabel: t.ciGo, action: () => this.setTab('checkin') };
+    if (m.key === 'faq') { const f = d.faq.find(x => x.id === m.id); return { ...base, title: f.title[L], hasTitle: true, text: f.a[L], hasWa: true }; }
+    return { ...base, text: t.botMiss, hasWa: true };
+  }
+  renderVals() {
+    const t = this.T(), L = this.L(), d = this.data(), st = this.state, r = st.res;
+    const dfmt = s => new Date(s + 'T12:00:00').toLocaleDateString(L === 'es' ? 'es-CR' : 'en-US', { day: 'numeric', month: 'short' });
+    const act = k => st.tab === k;
+    const tc = {};
+    ['arrive', 'tours', 'checkin', 'agent'].forEach(k => { tc[k] = act(k) ? 'var(--color-accent-700)' : 'var(--color-neutral-600)'; tc[k + 'Line'] = act(k) ? 'var(--color-accent)' : 'transparent'; });
+    const tours = d.tours.map((x, i) => {
+      const o = x[L] || x.en;
+      const facts = [['time', o.time], ['season', o.season], ['inc', o.inc], ['recs', o.recs], ['restr', o.restr]].filter(f => f[1]).map(([k, v]) => ({ label: t[k], text: v }));
+      const open = st.openTour === x.id;
+      return { num: String(i + 1).padStart(2, '0'), title: x.title[L], short: (o.time || '').split('\n')[0].replace(/\.$/, ''), desc: o.desc, facts, open, chev: open ? 'rotate(180deg)' : 'none', toggle: () => this.setState({ openTour: open ? null : x.id }), wa: this.wa(fill(t.waTour, { t: x.title[L], c: r?.code || '' })), hasLoc: !!x.loc, loc: x.loc };
+    });
+    const pc = st.photos.length;
+    return {
+      t, isLanding: st.screen === 'landing', isApp: st.screen === 'app',
+      setEs: () => this.setLang('es'), setEn: () => this.setLang('en'), toggleLang: () => this.setLang(L === 'es' ? 'en' : 'es'), otherLang: L === 'es' ? 'EN' : 'ES',
+      esBg: L === 'es' ? 'rgba(255,255,255,.92)' : 'transparent', esFg: L === 'es' ? 'var(--color-text)' : '#fff',
+      enBg: L === 'en' ? 'rgba(255,255,255,.92)' : 'transparent', enFg: L === 'en' ? 'var(--color-text)' : '#fff',
+      code: st.code, onCode: e => this.setState({ code: e.target.value, error: false }), onCodeKey: e => { if (e.key === 'Enter') this.lookup(); },
+      lookup: this.lookup, lookupLabel: st.loading ? t.finding : t.find, hasError: st.error, errorText: st.offline ? t.offlineErr : t.notFound, showHint: (this.props.showDemoHint ?? true) && !this.apiUrl(),
+      waHelp: this.wa(fill(t.waHelp, { c: r?.code || st.code })), waze: d.waze,
+      shareApp: this.shareApp, logout: this.logout, scrollRef: this.scrollRef, tc,
+      tabArrive: act('arrive'), tabTours: act('tours'), tabCheckin: act('checkin'), tabAgent: act('agent'),
+      goArrive: () => this.setTab('arrive'), goTours: () => this.setTab('tours'), goCheckin: () => this.setTab('checkin'), goAgent: () => this.setTab('agent'),
+      resKicker: r ? (L === 'es' ? 'Reserva ' : 'Reservation ') + r.code + ' · ' + r.villa : '',
+      greeting: r ? t.hello + ', ' + this.first() : '',
+      resMeta: r ? dfmt(r.arrive) + ' – ' + dfmt(r.depart) + ' · ' + r.guests + ' ' + t.guests : '',
+      toursKicker: d.tours.length + ' ' + t.toursCount, tours,
+      ciDone: st.ciDone, ciForm: !st.ciDone, ciReset: () => this.setState({ ciDone: false, photos: [] }),
+      ciDocsLead: t.ciDocsLead1 + (r ? ' (' + r.guests + ' ' + t.guests + ').' : '.'),
+      fileRef: this.fileRef, pickFiles: () => this.fileRef.current && this.fileRef.current.click(), onFiles: this.onFiles,
+      photos: st.photos.map(p => ({ bg: 'url("' + p.url + '")', remove: () => this.setState(s => ({ photos: s.photos.filter(q => q.id !== p.id) })) })),
+      photoCount: pc === 0 ? t.noPhotos : pc + ' ' + (pc === 1 ? t.photo : t.photos) + (r ? ' · ' + r.guests + ' ' + t.guests : ''),
+      early: st.early, toggleEarly: () => this.setState(s => ({ early: !s.early })),
+      policy: st.policy, togglePolicy: () => this.setState(s => ({ policy: !s.policy })),
+      ciDisabled: !(pc > 0 && st.policy), submitCheckin: this.submitCheckin,
+      msgs: st.msgs.map(m => m.from === 'user' ? { isUser: true, isBot: false, text: m.text } : this.botView(m)),
+      typing: st.typing, draft: st.draft, onDraft: e => this.setState({ draft: e.target.value }), onDraftKey: e => { if (e.key === 'Enter') this.ask(st.draft); }, send: () => this.ask(st.draft),
+      chips: CHIPS.map(id => d.faq.find(f => f.id === id)).filter(Boolean).map(f => ({ label: f.title[L], ask: () => this.ask(f.title[L]) })).concat([{ label: 'Tours', ask: () => this.ask('Tours') }]),
+      hasToast: !!st.toast, toast: st.toast
+    };
+  }
+}
+</script>
+</body>
+</html>

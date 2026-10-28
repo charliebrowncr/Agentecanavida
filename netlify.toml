@@ -1,0 +1,13 @@
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[[redirects]]
+  from = "/api/reservation"
+  to = "/.netlify/functions/reservation"
+  status = 200
+
+[[redirects]]
+  from = "/"
+  to = "/Canavida%20App.dc.html"
+  status = 200
